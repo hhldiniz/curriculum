@@ -29,6 +29,10 @@ jobs:
       - name: Build LaTeX
         run: |
           latexmk -pdf -interaction=nonstopmode main.tex
+      
+      - name: Build log results
+        run: |
+          cat main.log
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v2

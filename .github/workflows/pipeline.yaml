@@ -29,7 +29,7 @@ jobs:
       - name: Build LaTeX
         id: build-latex
         run: |
-          latexmk -pdf -interaction=nonstopmode main.tex
+          latexmk -pdf -interaction=nonstopmode -silent main.tex
         continue-on-error: true
         
       - name: Build log results

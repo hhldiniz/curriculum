@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use Node.js 16
+      - name: Use Node.js 20
         uses: actions/setup-node@v2
         with:
           node-version: 20
@@ -42,3 +42,32 @@ jobs:
           name: curriculum-pdf
           path: main.pdf
         if: steps.build-latex.outcome == 'success'
+
+
+  Release:
+    needs: LatexBuild
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0
+          release_name: Release v1.0.0
+          body: |
+            This is the release for the curriculum PDF.
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: curriculum-pdf
+          path: main.pdf
+        if: steps.create_release.outputs.release_id

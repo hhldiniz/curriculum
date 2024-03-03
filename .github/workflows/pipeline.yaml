@@ -24,10 +24,7 @@ jobs:
       - name: Set up LaTeX        
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: |
-           main.tex
-           education.tex
-           professional_experiance.tex
+          root_file: main.tex
 
       - name: Build LaTeX
         run: |

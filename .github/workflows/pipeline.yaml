@@ -27,9 +27,11 @@ jobs:
           root_file: main.tex
 
       - name: Build LaTeX
+        id: build-latex
         run: |
           latexmk -pdf -interaction=nonstopmode main.tex
-      
+        continue-on-error: true
+        
       - name: Build log results
         run: |
           cat main.log
@@ -39,3 +41,4 @@ jobs:
         with:
           name: curriculum-pdf
           path: main.pdf
+        if: steps.build-latex.outcome == 'success'

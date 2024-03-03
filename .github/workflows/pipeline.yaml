@@ -26,11 +26,11 @@ jobs:
       #   with:
       #     root_file: main.tex
 
-      # - name: Build LaTeX
-      #   id: build-latex
-      #   run: |
-      #     latexmk -pdf -interaction=nonstopmode -f main.tex
-      #   continue-on-error: true
+      - name: Build LaTeX
+        id: build-latex
+        run: |
+          latexmk -pdf -interaction=nonstopmode -f main.tex
+        continue-on-error: true
         
       - name: Build log results
         run: |

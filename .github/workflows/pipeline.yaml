@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -20,11 +25,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y latexmk
-
-      # - name: Set up LaTeX        
-      #   uses: xu-cheng/latex-action@v2
-      #   with:
-      #     root_file: main.tex
 
       - name: Build LaTeX
         id: build-latex
